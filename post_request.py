@@ -26,13 +26,15 @@ if fullPrice != currentPrice:
     f = open("currentPrice.txt", "w")
     f.write(str(fullPrice))
     f.close()
-    print("PRICE CHANGED")
 
     sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
     from_email = Email("WizzairPriceChange@konrad.com")
     to_email = Email("kdryja@gmail.com")
     subject = "WizzAir ABZ -> GDN Alert"
-    message = "Changed from: " + currentPrice + " GBP to: " + fullPrice + " GBP."
+    message = "Changed from: " + str(fullPrice) + " GBP to: " + str(currentPrice) + " GBP."
     content = Content("text/plain", message)
     mail = Mail(from_email, subject, to_email, content)
     response = sg.client.mail.send.post(request_body=mail.get())
+
+    to_email = Email("ddryja@wp.pl")
+    mail = Mail(from_email, subject, to_email, content)
