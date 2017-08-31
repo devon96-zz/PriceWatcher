@@ -1,2 +1,2 @@
 requests==2.18.4
-sendgrid-python==5.1.0
+sendgrid-python==0.1.1
