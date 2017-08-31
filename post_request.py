@@ -40,6 +40,6 @@ if fullPrice != currentPrice:
     mail = Mail(from_email, subject, to_email, content)
     response = sg.client.mail.send.post(request_body=mail.get())
 
-    to_email = Email("ddryja@wp.pl")
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
+    # to_email = Email("ddryja@wp.pl")
+    # mail = Mail(from_email, subject, to_email, content)
+    # response = sg.client.mail.send.post(request_body=mail.get())
