@@ -12,10 +12,14 @@ response = requests.post(url, data=json.dumps(payload), headers=headers)
 
 jsonResponse = json.loads(response.text)
 flights = jsonResponse["outboundFlights"]
+currentPrice = 0.0
 
-f = open("currentPrice.txt", "r+")
-currentPrice = float(f.read())
-f.close()
+try:
+    f = open("currentPrice.txt", "r")
+    currentPrice = float(f.read())
+    f.close()
+except:
+    currentPrice = 9999
 
 adminPrice = flights[0]["fares"][0]["administrationFeePrice"]["amount"]
 discBasePrice = flights[0]["fares"][0]["discountedFarePrice"]["amount"]
