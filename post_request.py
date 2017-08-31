@@ -23,15 +23,15 @@ discBasePrice = flights[0]["fares"][0]["discountedFarePrice"]["amount"]
 fullPrice =  (float(adminPrice) + float(discBasePrice))
 
 if fullPrice != currentPrice:
-    f = open("currentPrice.txt", "w")
-    f.write(str(fullPrice))
-    f.close()
+    f1 = open("currentPrice.txt", "w")
+    f1.write(str(fullPrice))
+    f1.close()
 
     sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
     from_email = Email("WizzairPriceChange@konrad.com")
     to_email = Email("kdryja@gmail.com")
     subject = "WizzAir ABZ -> GDN Alert"
-    message = "Changed from: " + str(fullPrice) + " GBP to: " + str(currentPrice) + " GBP."
+    message = "Changed from: " + str(currentPrice) + " GBP to: " + str(fullPrice) + " GBP."
     content = Content("text/plain", message)
     mail = Mail(from_email, subject, to_email, content)
     response = sg.client.mail.send.post(request_body=mail.get())
