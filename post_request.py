@@ -6,8 +6,6 @@ from sendgrid.helpers.mail import *
 import psycopg2
 import urllib.parse as urlparse
 
-os.environ['DATABASE_URL'] = "postgres://gynhccrrobqgsq:14e2f986d43812a19924c788be5d62e4558339cf5df1c3430d5a8b8aa77ba5a6@ec2-79-125-2-71.eu-west-1.compute.amazonaws.com:5432/dd8ted3qrtiaun"
-
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 dbname = url.path[1:]
 user = url.username
