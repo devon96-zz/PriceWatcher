@@ -45,18 +45,12 @@ if fullPrice != currentPrice:
     cur.execute("UPDATE Flights SET Price='"+str(fullPrice)+"' WHERE ID=1")
     con.commit()
 
-    sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-    from_email = Email("WizzairPriceChange@konrad.com")
-    to_email = Email("kdryja@gmail.com")
-    subject = "WizzAir ABZ -> GDN Alert"
-    message = "Changed from: " + str(currentPrice) + " GBP to: " + str(fullPrice) + " GBP."
-    content = Content("text/plain", message)
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-
-    to_email = Email("ddryja@wp.pl")
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
+    username = "kdryja"
+    password = os.environ['SMS_API_KEY']
+    smsTo = os.environ['DAD_NUMBER']
+    message = "WizzAir Alert. Price changed ABZ to GDN. From %s GBP To %s GBP" % (str(currentPrice), str(fullPrice))
+    url = "http://api.smsapi.com/sms.do?username=%s&password=%s&to=%s&message=%s" % (username, password, smsTo, message)
+    r = requests.get(url)
 
 
 cur.close()
