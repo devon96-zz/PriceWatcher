@@ -4,6 +4,7 @@ import json
 import urllib.parse as urlparse
 import requests
 import psycopg2
+from send_email import send_email
 
 def main():
     """Main method"""
@@ -62,6 +63,7 @@ def main():
         url = "http://api.smsapi.com/sms.do?username=%s&password=%s&to=%s&message=%s" % (username, password, sms_to, message)
         requests.get(url)
 
+        send_email("kdryja@gmail.com", str(current_price), str(full_price))
 
     cur.close()
     con.close()
