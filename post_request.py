@@ -52,6 +52,10 @@ def main():
 
     full_price = (float(admin_price) + float(disc_baseprice))
 
+    print("Price check complete. Past price: %s. Current price: %s." % (
+        str(current_price),
+        str(full_price)))
+
     if full_price != current_price:
         cur.execute("UPDATE Flights SET Price='"+str(full_price)+"' WHERE ID=1")
         con.commit()
