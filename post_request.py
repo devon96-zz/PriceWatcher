@@ -67,7 +67,7 @@ def main():
         url = "http://api.smsapi.com/sms.do?username=%s&password=%s&to=%s&message=%s" % (username, password, sms_to, message)
         requests.get(url)
 
-        send_email("kdryja@gmail.com", str(current_price), str(full_price))
+        send_email("kdryja@gmail.com", str(full_price), str(current_price))
 
     cur.close()
     con.close()
